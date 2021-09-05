@@ -42,6 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeAndEnqueue(request: OneTimeWorkRequest) {
+        wm.enqueue(request)
+        workId = request.id
+        wm.getWorkInfoByIdLiveData(request.id).observe(this, androidx.lifecycle.Observer { status ->
+            binding.txtStatus = when (status?.state){
 
+            }
+        })
     }
 }
