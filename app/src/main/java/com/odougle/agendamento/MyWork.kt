@@ -11,7 +11,7 @@ class MyWork(context: Context, workerParams: WorkerParameters) : Worker(context,
         val firstName = inputData.getString(PARAM_FIRST_NAME)
         val outputData = Data.Builder()
             .putString(PARAM_NAME, "$firstName Douglas")
-            .putInt(PARAM_AGE, 35)
+            .putInt(PARAM_AGE, 24)
             .putLong(PARAM_TIME, System.currentTimeMillis())
             .build()
         return Result.success(outputData)
