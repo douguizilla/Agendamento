@@ -33,6 +33,15 @@ class MainActivity : AppCompatActivity() {
             observeAndEnqueue(request)
         }
 
+        binding.btnStop.setOnClickListener {
+            workId?.let { uuid ->
+                wm.cancelWorkById(uuid)
+            }
+        }
+
+    }
+
+    private fun observeAndEnqueue(request: OneTimeWorkRequest) {
 
     }
 }
