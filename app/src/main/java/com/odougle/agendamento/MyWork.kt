@@ -10,7 +10,7 @@ class MyWork(context: Context, workerParams: WorkerParameters) : Worker(context,
     override fun doWork(): Result {
         val firstName = inputData.getString(PARAM_FIRST_NAME)
         val outputData = Data.Builder()
-            .putString(PARAM_NAME, "$firstName Douglas")
+            .putString(PARAM_NAME, "$firstName Gomes")
             .putInt(PARAM_AGE, 24)
             .putLong(PARAM_TIME, System.currentTimeMillis())
             .build()
