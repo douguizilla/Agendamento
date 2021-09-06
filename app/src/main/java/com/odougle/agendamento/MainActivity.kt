@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.odougle.agendamento.databinding.ActivityMainBinding
 import java.util.*
@@ -45,8 +46,20 @@ class MainActivity : AppCompatActivity() {
         wm.enqueue(request)
         workId = request.id
         wm.getWorkInfoByIdLiveData(request.id).observe(this, androidx.lifecycle.Observer { status ->
-            binding.txtStatus = when (status?.state){
-
+            binding.txtStatus.text = when (status?.state){
+                WorkInfo.State.ENQUEUED -> "Enfileirado"
+                WorkInfo.State.BLOCKED -> "Bloqueado"
+                WorkInfo.State.CANCELLED -> "Cancelado"
+                WorkInfo.State.RUNNING -> "Executando"
+                WorkInfo.State.SUCCEEDED -> "Sucesso"
+                WorkInfo.State.FAILED -> "Falhou"
+                else -> "Indefinido"
+            }
+            binding.txtOutput.text = status?.outputData?.run {
+                """${getString(MyWork.PARAM_NAME)}
+                    |${getInt(MyWork.PARAM_AGE,0)}
+                    |${getLong(MyWork.PARAM_TIME,0)}
+                """.trimMargin()
             }
         })
     }
